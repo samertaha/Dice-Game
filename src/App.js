@@ -67,8 +67,8 @@ class App extends React.Component {
     this.setState(
       (prevState) => {
         const globScore =
-          this.state[this.state.currentPlayer].globalScore +
-          this.state[this.state.currentPlayer].tempScore;
+          this.state[prevState.currentPlayer].globalScore +
+          this.state[prevState.currentPlayer].tempScore;
 
         let otherPlayer = this.state.currentPlayer;
         const number = otherPlayer.charAt(otherPlayer.length - 1);
@@ -98,15 +98,13 @@ class App extends React.Component {
             ...prevState[otherPlayer],
             winned:
               this.state[otherPlayer].globalScore === this.state.scoreGoal ||
-              this.state[this.state.currentPlayer].globalScore > 100
+              globScore > 100
                 ? true
                 : false,
           },
         };
       },
-      () => {
-        console.log('Heey there');
-      }
+      () => {}
     );
   };
 

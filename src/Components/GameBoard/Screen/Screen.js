@@ -3,12 +3,13 @@ import React from 'react';
 class Dice extends React.Component {
   render() {
     return (
-      <div>
+      <div className='screen'>
         <img
           src={`./images/dice-${this.props.currentDiceRoll[0]}.png`}
           alt='dice1'
           width='50px'
           border='1px solid lightGray'
+          style={{ margin: '5px' }}
         />
         <img
           src={`./images/dice-${this.props.currentDiceRoll[1]}.png`}
