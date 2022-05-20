@@ -10,6 +10,10 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.6rem;
   color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {
@@ -20,6 +24,7 @@ body {
 }
 .vert {
   height: 50vh;
+  margin: 0 3rem;
   flex-direction: column;
   justify-content: space-between;
 }

@@ -82,6 +82,7 @@ class App extends React.Component {
         );
         return {
           ...prevState,
+          currentPlayer: otherPlayer,
           [this.state.currentPlayer]: {
             ...prevState[this.state.currentPlayer],
             tempScore: 0,
@@ -93,7 +94,14 @@ class App extends React.Component {
                 ? true
                 : false,
           },
-          currentPlayer: otherPlayer,
+          [otherPlayer]: {
+            ...prevState[otherPlayer],
+            winned:
+              this.state[otherPlayer].globalScore === this.state.scoreGoal ||
+              this.state[this.state.currentPlayer].globalScore > 100
+                ? true
+                : false,
+          },
         };
       },
       () => {
