@@ -32,7 +32,13 @@ class Player extends React.Component {
     const myTurn = playerName === currentPlayer;
     return (
       <div className='container vert'>
-        <h1 style={{ color: myTurn ? 'green' : 'black' }}>
+        <h1
+          className={winned ? 'blink' : ''}
+          style={{
+            color: myTurn || winned ? 'green' : 'black',
+            fontSize: 'inherit',
+          }}
+        >
           {winned ? `${playerName} WINNED` : playerName}
         </h1>
         <div className='globalScore'>{globalScore}</div>

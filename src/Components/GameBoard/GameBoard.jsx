@@ -7,7 +7,7 @@ class GameBoard extends React.Component {
   render() {
     return (
       <div className='container vert'>
-        <NewGameBtn newGame={this.props.newGame} />
+        <NewGameBtn newGame={this.props.resetGame} />
         <Screen currentDiceRoll={this.props.currentDiceRoll} />
         <button type='button' onClick={this.props.rollIt}>
           Roll

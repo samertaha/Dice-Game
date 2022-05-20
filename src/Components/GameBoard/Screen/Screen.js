@@ -9,7 +9,6 @@ class Dice extends React.Component {
           alt='dice1'
           width='50px'
           border='1px solid lightGray'
-          style={{ margin: '5px' }}
         />
         <img
           src={`./images/dice-${this.props.currentDiceRoll[1]}.png`}

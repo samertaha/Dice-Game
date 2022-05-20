@@ -64,47 +64,51 @@ class App extends React.Component {
   };
 
   holdCurrentPlayer = () => {
-    this.setState(
-      (prevState) => {
-        const globScore =
-          this.state[prevState.currentPlayer].globalScore +
-          this.state[prevState.currentPlayer].tempScore;
+    if (this.state.player1.winned || this.state.player2.winned)
+      this.resetGame();
+    else {
+      this.setState(
+        (prevState) => {
+          const globScore =
+            this.state[prevState.currentPlayer].globalScore +
+            this.state[prevState.currentPlayer].tempScore;
 
-        let otherPlayer = this.state.currentPlayer;
-        const number = otherPlayer.charAt(otherPlayer.length - 1);
-        otherPlayer =
-          number === '1'
-            ? otherPlayer.replace(/.$/, '2')
-            : otherPlayer.replace(/.$/, '1');
-        console.log(
-          'currentPlayer global ',
-          this.state[prevState.currentPlayer].globalScore
-        );
-        return {
-          ...prevState,
-          currentPlayer: otherPlayer,
-          [this.state.currentPlayer]: {
-            ...prevState[this.state.currentPlayer],
-            tempScore: 0,
-            globalScore: globScore,
-            winned:
-              globScore === this.state.scoreGoal ||
-              this.state[otherPlayer].globalScore > 100
-                ? true
-                : false,
-          },
-          [otherPlayer]: {
-            ...prevState[otherPlayer],
-            winned:
-              this.state[otherPlayer].globalScore === this.state.scoreGoal ||
-              globScore > 100
-                ? true
-                : false,
-          },
-        };
-      },
-      () => {}
-    );
+          let otherPlayer = this.state.currentPlayer;
+          const number = otherPlayer.charAt(otherPlayer.length - 1);
+          otherPlayer =
+            number === '1'
+              ? otherPlayer.replace(/.$/, '2')
+              : otherPlayer.replace(/.$/, '1');
+          console.log(
+            'currentPlayer global ',
+            this.state[prevState.currentPlayer].globalScore
+          );
+          return {
+            ...prevState,
+            currentPlayer: otherPlayer,
+            [this.state.currentPlayer]: {
+              ...prevState[this.state.currentPlayer],
+              tempScore: 0,
+              globalScore: globScore,
+              winned:
+                globScore === this.state.scoreGoal ||
+                this.state[otherPlayer].globalScore > 100
+                  ? true
+                  : false,
+            },
+            [otherPlayer]: {
+              ...prevState[otherPlayer],
+              winned:
+                this.state[otherPlayer].globalScore === this.state.scoreGoal ||
+                globScore > 100
+                  ? true
+                  : false,
+            },
+          };
+        },
+        () => {}
+      );
+    }
   };
 
   updateTotalScoreFromCurrent = () => {
@@ -145,12 +149,38 @@ class App extends React.Component {
   };
 
   rollIt = () => {
-    const dice1 = Math.floor(Math.random() * 6) + 1;
-    const dice2 = Math.floor(Math.random() * 6) + 1;
-    console.log('--------------------------------------');
-    console.log(dice1, dice2);
-    if (dice1 === dice2 && dice1 === 6) this.updateCurrentPlayer(null);
-    else this.updateCurrentPlayer([dice1, dice2]);
+    if (this.state.player1.winned || this.state.player2.winned)
+      this.resetGame();
+    else {
+      const dice1 = Math.floor(Math.random() * 6) + 1;
+      const dice2 = Math.floor(Math.random() * 6) + 1;
+      console.log('--------------------------------------');
+      console.log(dice1, dice2);
+      if (dice1 === dice2 && dice1 === 6) this.updateCurrentPlayer(null);
+      else this.updateCurrentPlayer([dice1, dice2]);
+    }
+  };
+
+  resetGame = () => {
+    this.setState({
+      currentPlayer: 'player1',
+      scoreGoal: 100,
+      newGame: false,
+      holdPressed: false,
+      currentDiceRoll: [1, 1],
+      player1: {
+        name: 'Samer',
+        tempScore: 0,
+        globalScore: 0,
+        winned: null,
+      },
+      player2: {
+        name: 'Avi',
+        tempScore: 0,
+        globalScore: 0,
+        winned: null,
+      },
+    });
   };
 
   render() {
@@ -170,6 +200,7 @@ class App extends React.Component {
         <GameBoard
           currentPlayer={this.state.currentPlayer}
           newGame={this.newGame}
+          resetGame={this.resetGame}
           holdCurrentPlayer={this.holdCurrentPlayer}
           currentDiceRoll={this.state.currentDiceRoll}
           rollIt={this.rollIt}
