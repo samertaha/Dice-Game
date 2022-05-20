@@ -88,8 +88,7 @@ class App extends React.Component {
             tempScore: 0,
             globalScore: globScore,
             winned:
-              this.state[this.state.currentPlayer].globalScore ===
-                this.state.scoreGoal ||
+              globScore === this.state.scoreGoal ||
               this.state[otherPlayer].globalScore > 100
                 ? true
                 : false,
