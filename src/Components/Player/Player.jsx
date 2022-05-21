@@ -31,7 +31,13 @@ class Player extends React.Component {
       this.props;
     const myTurn = playerName === currentPlayer;
     return (
-      <div className='container vert'>
+      <div
+        className='container vert'
+        style={{
+          transition: 'all .3s ease-in-out',
+          border: myTurn || winned ? '2px solid green' : 'none',
+        }}
+      >
         <h1
           className={winned ? 'blink' : ''}
           style={{
