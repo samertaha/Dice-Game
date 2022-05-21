@@ -1,6 +1,7 @@
 import React from 'react';
 import Player from './Components/Player/Player';
 import GameBoard from './Components/GameBoard/GameBoard';
+import dice from './dice.wav';
 
 import './App.css';
 
@@ -174,6 +175,8 @@ class App extends React.Component {
       const dice2 = Math.floor(Math.random() * 6) + 1;
       console.log('--------------------------------------');
       console.log(dice1, dice2);
+      let sound = new Audio(dice);
+      sound.play();
       if (dice1 === dice2 && dice1 === 6 && dice2 === 6)
         this.updateCurrentPlayer(null);
       else this.updateCurrentPlayer([dice1, dice2]);
