@@ -35,7 +35,7 @@ class Player extends React.Component {
         className='container vert'
         style={{
           transition: 'all .1s ease-in-out',
-          border: myTurn || winned ? '5px solid green' : 'none',
+          border: myTurn || winned ? '2px solid green' : 'none',
         }}
       >
         <h1
