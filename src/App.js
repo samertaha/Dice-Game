@@ -28,22 +28,33 @@ class App extends React.Component {
 
   updateCurrentPlayer = (currentDiceRoll) => {
     if (!currentDiceRoll)
-      this.setState((prevState) => {
-        let otherPlayer = this.state.currentPlayer;
-        const number = otherPlayer.charAt(otherPlayer.length - 1);
-        otherPlayer =
-          number === '1'
-            ? otherPlayer.replace(/.$/, '2')
-            : otherPlayer.replace(/.$/, '1');
-        console.log(otherPlayer);
-        return {
-          currentPlayer: otherPlayer,
-          [this.state.currentPlayer]: {
-            ...prevState[this.state.currentPlayer],
-            tempScore: 0,
-          },
-        };
-      }, console.log(this.state.player1.tempScore));
+      this.setState(
+        (prevState) => {
+          let otherPlayer = this.state.currentPlayer;
+          const number = otherPlayer.charAt(otherPlayer.length - 1);
+          otherPlayer =
+            number === '1'
+              ? otherPlayer.replace(/.$/, '2')
+              : otherPlayer.replace(/.$/, '1');
+          console.log(otherPlayer);
+          return {
+            rolling: true,
+            currentDiceRoll: [6, 6],
+            currentPlayer: otherPlayer,
+            [this.state.currentPlayer]: {
+              ...prevState[this.state.currentPlayer],
+              tempScore: 0,
+            },
+          };
+        },
+        () => {
+          setTimeout(() => {
+            this.setState((prevState) => {
+              return { rolling: false };
+            });
+          }, 1500);
+        }
+      );
     else {
       this.setState(
         (prevState) => {
@@ -163,7 +174,8 @@ class App extends React.Component {
       const dice2 = Math.floor(Math.random() * 6) + 1;
       console.log('--------------------------------------');
       console.log(dice1, dice2);
-      if (dice1 === dice2 && dice1 === 6) this.updateCurrentPlayer(null);
+      if (dice1 === dice2 && dice1 === 6 && dice2 === 6)
+        this.updateCurrentPlayer(null);
       else this.updateCurrentPlayer([dice1, dice2]);
     }
   };
