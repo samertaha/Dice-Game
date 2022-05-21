@@ -14,8 +14,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 30px solid green;
-  border-radius: 50%;
+  /* border: 9px solid green; */
+  /* border-radius: 5px; */
   background: linear-gradient(
       217deg,
       rgba(255, 0, 0, 0.8),
@@ -38,6 +38,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   padding: 1.6rem;
+  flex: 1;
 }
 button {
   border: none;
@@ -46,6 +47,7 @@ button {
   color: inherit;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
+  background-color: inherit;
 }
 button:hover {
   color: black;
