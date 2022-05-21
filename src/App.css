@@ -24,6 +24,7 @@ body {
 }
 .vert {
   height: 50vh;
+  width: 12rem;
   margin: 0 3rem;
   flex-direction: column;
   justify-content: space-between;
