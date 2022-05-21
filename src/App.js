@@ -11,6 +11,7 @@ class App extends React.Component {
     newGame: false,
     holdPressed: false,
     currentDiceRoll: [1, 1],
+    rolling: false,
     player1: {
       name: 'Samer',
       tempScore: 0,
@@ -47,6 +48,7 @@ class App extends React.Component {
       this.setState(
         (prevState) => {
           return {
+            rolling: true,
             currentDiceRoll: currentDiceRoll,
             [this.state.currentPlayer]: {
               ...prevState[this.state.currentPlayer],
@@ -57,7 +59,12 @@ class App extends React.Component {
             },
           };
         },
-        () => console.log(this.state[this.state.currentPlayer].tempScore)
+        () =>
+          setTimeout(() => {
+            this.setState((prevState) => {
+              return { rolling: false };
+            });
+          }, 1000)
       );
       console.log('imhere');
     }
@@ -204,6 +211,7 @@ class App extends React.Component {
           holdCurrentPlayer={this.holdCurrentPlayer}
           currentDiceRoll={this.state.currentDiceRoll}
           rollIt={this.rollIt}
+          rolling={this.state.rolling}
         />
         <Player
           currentPlayer={this.state[this.state.currentPlayer].name}
