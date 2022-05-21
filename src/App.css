@@ -26,19 +26,24 @@ body {
 }
 
 .container {
+  flex: 1;
+  margin-top: 5rem 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-wrap: wrap;
 }
 .vert {
-  height: 50vh;
+  height: 70vh;
   width: 15rem;
   margin: 0 3rem;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.6rem;
   flex: 1;
+  flex-wrap: nowrap;
 }
 button {
   border: none;

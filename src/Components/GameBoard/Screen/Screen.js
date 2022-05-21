@@ -3,7 +3,7 @@ import React from 'react';
 class Dice extends React.Component {
   render() {
     return (
-      <div className={`screen`}>
+      <div className={`screen`} style={{ flex: '1' }}>
         <img
           src={`./images/dice-${this.props.currentDiceRoll[0]}.png`}
           alt='dice1'
